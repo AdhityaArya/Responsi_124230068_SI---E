@@ -15,7 +15,7 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   late Future<List<Restaurant>> _favoritesFuture;
-  final DatabaseHelper _dbHelper = DatabaseHelper(); // Ganti ke DatabaseHelper
+  final DatabaseHelper _dbHelper = DatabaseHelper();
 
   @override
   void initState() {

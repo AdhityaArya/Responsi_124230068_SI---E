@@ -97,12 +97,11 @@ class RestaurantDetail {
   final String? name;
   final String? description;
   final String? city;
-  final String? address; // Untuk Detail
+  final String? address;
   final String? pictureId;
-  final List<Category> categories; // Untuk Detail
-  final Menus menus; // Untuk Detail
+  final List<Category> categories;
+  final Menus menus;
   final double? rating;
-  final List<CustomerReview> customerReviews; // Untuk Detail
 
   RestaurantDetail({
     this.id,
@@ -114,7 +113,6 @@ class RestaurantDetail {
     required this.categories,
     required this.menus,
     this.rating,
-    required this.customerReviews,
   });
 
   factory RestaurantDetail.fromJson(Map<String, dynamic> json) =>
@@ -130,9 +128,6 @@ class RestaurantDetail {
         ),
         menus: Menus.fromJson(json["menus"]),
         rating: (json['rating'] as num?)?.toDouble(),
-        customerReviews: List<CustomerReview>.from(
-          json["customerReviews"].map((x) => CustomerReview.fromJson(x)),
-        ),
       );
 }
 
@@ -153,23 +148,5 @@ class Menus {
     drinks: List<Category>.from(
       json["drinks"].map((x) => Category.fromJson(x)),
     ),
-  );
-}
-
-class CustomerReview {
-  final String name;
-  final String review;
-  final String date;
-
-  CustomerReview({
-    required this.name,
-    required this.review,
-    required this.date,
-  });
-
-  factory CustomerReview.fromJson(Map<String, dynamic> json) => CustomerReview(
-    name: json["name"] as String,
-    review: json["review"] as String,
-    date: json["date"] as String,
   );
 }

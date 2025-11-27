@@ -3,9 +3,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/makanan.dart'; // Import Restaurant model
+import '/models/makanan.dart';
 
-// --- 1. Database Helper (Local Database untuk Favorit) ---
 class DatabaseHelper {
   static DatabaseHelper? _instance;
   static Database? _database;
@@ -81,46 +80,38 @@ class DatabaseHelper {
   }
 }
 
-// --- 2. Shared Preferences Helper (untuk Login/Register) ---
 class AuthPreferenceHelper {
   static const String _usernameKey = 'username';
   static const String _isLoggedInKey = 'isLoggedIn';
 
-  // Menyimpan data login
   Future<void> saveLogin(String username) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_usernameKey, username);
     await prefs.setBool(_isLoggedInKey, true);
   }
 
-  // Mendapatkan username
   Future<String?> getUsername() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_usernameKey);
   }
 
-  // Mengecek status login
   Future<bool> getIsLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_isLoggedInKey) ?? false;
   }
 
-  // Melakukan logout
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_usernameKey);
     await prefs.setBool(_isLoggedInKey, false);
   }
 
-  // Simulasi Register
   Future<bool> register(String username, String password) async {
     final prefs = await SharedPreferences.getInstance();
-    // Simpan data login sederhana
     await prefs.setString('user_$username', password);
     return true;
   }
 
-  // Simulasi Login
   Future<bool> checkLogin(String username, String password) async {
     final prefs = await SharedPreferences.getInstance();
     final storedPassword = prefs.getString('user_$username');

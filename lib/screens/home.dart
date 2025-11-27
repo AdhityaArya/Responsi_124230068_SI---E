@@ -191,7 +191,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         onTap: () {
-          // Arahkan ke Detail Screen
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -309,7 +308,7 @@ class _FavoritePageState extends State<FavoritePage> {
                 name: restaurant.name!,
               ),
             ),
-          ).then((_) => _refreshFavorites()); // Refresh saat kembali
+          ).then((_) => _refreshFavorites());
         },
       ),
     );

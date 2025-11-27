@@ -1,12 +1,9 @@
-// lib/main.dart (Revisi ke Sqflite)
-
 import 'package:flutter/material.dart';
-import 'screens/login.dart';
-import 'screens/home.dart';
-import 'services/authentication.dart';
+import '/screens/login.dart';
+import '/screens/home.dart';
+import '/services/authentication.dart';
 
 void main() async {
-  // Hanya perlu memastikan binding diinisialisasi untuk Shared Prefs/Database
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }

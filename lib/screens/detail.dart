@@ -1,9 +1,7 @@
-// lib/screens/detail.dart
-
 import 'package:flutter/material.dart';
-import '../models/makanan.dart';
-import '../services/api_service.dart';
-import '../services/authentication.dart';
+import '/models/makanan.dart';
+import '/services/api_service.dart';
+import '/services/authentication.dart';
 
 class DetailScreen extends StatefulWidget {
   final String restaurantId;
@@ -39,7 +37,6 @@ class _DetailScreenState extends State<DetailScreen> {
     });
   }
 
-  // Fungsi Toggle Favorit (Soal No. 3)
   Future<void> _toggleFavorite(RestaurantDetail detail) async {
     final restaurantLite = Restaurant(
       id: detail.id,
@@ -56,7 +53,7 @@ class _DetailScreenState extends State<DetailScreen> {
         const SnackBar(
           content: Text('Dihapus dari Favorit'),
           backgroundColor: Colors.red,
-        ), // Snackbar merah
+        ),
       );
     } else {
       await _dbHelper.insertFavorite(restaurantLite);
@@ -64,10 +61,10 @@ class _DetailScreenState extends State<DetailScreen> {
         const SnackBar(
           content: Text('Ditambahkan ke Favorit'),
           backgroundColor: Colors.green,
-        ), // Snackbar hijau
+        ),
       );
     }
-    _checkFavoriteStatus(); // Update status icon
+    _checkFavoriteStatus();
   }
 
   @override
@@ -82,7 +79,7 @@ class _DetailScreenState extends State<DetailScreen> {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
-          if (!snapshot.hasData || snapshot.data!.restaurant == null) {
+          if (!snapshot.hasData) {
             return const Center(child: Text('Detail data tidak ditemukan.'));
           }
 
@@ -100,7 +97,6 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  // AppBar dengan Gambar dan Tombol Favorit
   Widget _buildSliverAppBar(RestaurantDetail detail) {
     return SliverAppBar(
       expandedHeight: 250.0,
@@ -137,14 +133,12 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  // Konten Detail Restoran (Soal No. 3)
   Widget _buildContent(RestaurantDetail detail) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Nama & Rating
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -167,7 +161,6 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
           const SizedBox(height: 8),
 
-          // Lokasi & Alamat
           Row(
             children: [
               const Icon(Icons.location_on, size: 18, color: Colors.grey),

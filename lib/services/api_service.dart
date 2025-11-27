@@ -2,14 +2,13 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/makanan.dart';
+import '/models/makanan.dart';
 
 class ApiService {
   static const String baseUrl = 'https://restaurant-api.dicoding.dev/';
   static const String smallPictureUrl = '${baseUrl}images/small/';
   static const String mediumPictureUrl = '${baseUrl}images/medium/';
 
-  // Endpoint 1: List Semua Restaurant
   Future<RestaurantListResult> fetchAllRestaurants() async {
     final response = await http.get(Uri.parse('${baseUrl}list'));
 
@@ -20,7 +19,6 @@ class ApiService {
     }
   }
 
-  // Endpoint 2: Detail Restaurant
   Future<RestaurantDetailResult> fetchRestaurantDetail(String id) async {
     final response = await http.get(Uri.parse('${baseUrl}detail/$id'));
 
@@ -31,14 +29,12 @@ class ApiService {
     }
   }
 
-  // Endpoint 3: Search/Filter Restaurant (Soal No. 5)
   Future<RestaurantListResult> searchRestaurants(String query) async {
     final response = await http.get(Uri.parse('${baseUrl}search?q=$query'));
 
     if (response.statusCode == 200) {
       return RestaurantListResult.fromJson(json.decode(response.body));
     } else {
-      // Menangani kasus jika hasil search kosong
       try {
         return RestaurantListResult.fromJson(json.decode(response.body));
       } catch (e) {
